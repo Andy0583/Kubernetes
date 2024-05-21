@@ -43,7 +43,7 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 net.ipv4.ip_forward = 1
 EOF
-```
+
 sysctl --system
 
 apt-get -y install \
@@ -76,3 +76,4 @@ apt install -y kubelet=1.27.10-1.1 kubeadm=1.27.10-1.1  kubectl=1.27.10-1.1
 apt-mark hold kubelet kubeadm kubectl
 
 modprobe br_netfilter
+```
