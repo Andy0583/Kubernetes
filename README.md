@@ -1,5 +1,5 @@
 # K8S交流平台
-提供一個K8S技術交流平台，歡迎有興趣或熱愛此技術人士，一同加入此平台，將不定期進行更新。
+提供一個K8S技術交流平台，歡迎有興趣或熱愛此技術人士，一同討論/交流/指導，此平台未來將不定期進行更新。
 
 ## Veeam K10
 ![](https://docs.kasten.io/latest/_images/K10-ecosystem-diagram1.png)
