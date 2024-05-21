@@ -1,7 +1,6 @@
 # 安裝CSI
+<body><p align="right">by Andy Hsu</p></body>
 
-|by Andy Hsu|
-|----|
 ### 1.安裝所需Tool
 ```
 apt-get update
