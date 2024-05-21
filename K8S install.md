@@ -10,7 +10,9 @@ sudo ufw disable
 ```
 sudo vim /etc/ssh/sshd_config
 ```
+> ```
 > PermitRootLogin yes
+> ```
 ```
 sudo systemctl restart ssh
 ```
