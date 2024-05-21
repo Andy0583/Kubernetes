@@ -87,5 +87,23 @@ modprobe br_netfilter
 ```
 kubeadm init --control-plane-endpoint="172.22.46.241" --pod-network-cidr=10.244.0.0/16
 ```
+
 ![](https://github.com/Andy0583/Dell-CSI-for-Powerstore/blob/main/image/001.png?raw=true)
 > 紀錄上圖"Then you can join any number of worker nodes by running the following on each as root"資訊
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+wget https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f kube-flannel.yml
+```
+
+### Worker Node加入K8S Cluster（Only for Workter）
+```
+kubeadm join 172.22.46.241:6443 --token 0bxz18.pl91tl6wuovyi04i \
+        --discovery-token-ca-cert-hash sha256:860dfa06a3f7614fa4fa404fa8647ae06ce001b52f2a469bc2c76d93cc59d174
+```
+> 加入Master產出的Join資訊
+
+### 於Master檢查Node資訊
