@@ -1,10 +1,16 @@
 # 安裝K8S
+
 ### 修改root密碼 / 關閉防火牆 / 開啟root SSH
 ```
 sudo passwd root
 sudo ufw disable
+```
+```
 sudo vim /etc/ssh/sshd_config
-    [PermitRootLogin yes]
+```
+<font color=#800000>酒紅色</font>
+ PermitRootLogin yes
+```
 sudo systemctl restart ssh
 ```
 
