@@ -87,3 +87,5 @@ modprobe br_netfilter
 ```
 kubeadm init --control-plane-endpoint="172.22.46.241" --pod-network-cidr=10.244.0.0/16
 ```
+![](https://github.com/Andy0583/Dell-CSI-for-Powerstore/blob/main/image/001.png?raw=true)
+> 紀錄上圖"Then you can join any number of worker nodes by running the following on each as root"資訊
