@@ -106,4 +106,5 @@ kubeadm join 172.22.46.241:6443 --token 0bxz18.pl91tl6wuovyi04i \
 ```
 > 加入Master產出的Join資訊
 
-### 於Master檢查Node資訊
+### 於Master檢查Node資訊，確認安裝成功
+![](https://github.com/Andy0583/Dell-CSI-for-Powerstore/blob/main/image/002.png?raw=true)
