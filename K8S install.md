@@ -8,8 +8,7 @@ sudo ufw disable
 ```
 sudo vim /etc/ssh/sshd_config
 ```
-<font color=#800000>酒紅色</font>
- PermitRootLogin yes
+> PermitRootLogin yes
 ```
 sudo systemctl restart ssh
 ```
