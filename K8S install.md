@@ -8,7 +8,8 @@ sudo vim /etc/ssh/sshd_config
 sudo systemctl restart ssh
 ```
 
-＃ 更新
+更新
 ```
 apt update -y && apt upgrade -y
 ```
+
