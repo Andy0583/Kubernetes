@@ -77,4 +77,4 @@ apt-mark hold kubelet kubeadm kubectl
 
 modprobe br_netfilter
 ```
-<img width="1200" height="40" src="https://github.com/Andy0583/Dell-CSI-for-Powerstore/blob/main/k8s01.jpg"/>
+![k8s2]()
