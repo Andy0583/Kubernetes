@@ -13,3 +13,66 @@ sudo systemctl restart ssh
 apt update -y && apt upgrade -y
 ```
 
+### 修改Hostname
+```
+hostnamectl set-hostname "k8s3.andy.com"
+cat >> /etc/hosts << EOF
+172.22.46.241 k8s1.andy.com
+172.22.46.242 k8s2.andy.com
+172.22.46.243 k8s3.andy.com
+EOF
+```
+
+### 關閉Swap
+```
+swapoff -a
+sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+```
+
+### 安裝K8S
+```
+cat <<EOF | tee /etc/modules-load.d/k8s.conf
+overlay
+br_netfilter
+EOF
+
+modprobe overlay
+
+cat <<EOF | tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF
+```
+sysctl --system
+
+apt-get -y install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release \
+    apt-transport-https \
+    gpg
+
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null  
+apt-get update
+
+apt-get install containerd.io  
+containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
+sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+systemctl restart containerd
+systemctl enable containerd
+
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.27/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+apt-get update
+apt-cache madison kubelet
+apt install -y kubelet=1.27.10-1.1 kubeadm=1.27.10-1.1  kubectl=1.27.10-1.1
+apt-mark hold kubelet kubeadm kubectl
+
+modprobe br_netfilter
