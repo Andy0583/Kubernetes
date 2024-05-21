@@ -18,9 +18,9 @@ sudo systemctl restart ssh
 apt update -y && apt upgrade -y
 ```
 
-### 修改Hostname
+### 修改Hostname及Hosts (依據不同主機名稱修改)
 ```
-hostnamectl set-hostname "k8s3.andy.com"
+hostnamectl set-hostname "k8s1.andy.com"
 cat >> /etc/hosts << EOF
 172.22.46.241 k8s1.andy.com
 172.22.46.242 k8s2.andy.com
