@@ -83,3 +83,7 @@ apt-mark hold kubelet kubeadm kubectl
 modprobe br_netfilter
 ```
 
+### K8S初始化（Only for Master）
+```
+kubeadm init --control-plane-endpoint="172.22.46.241" --pod-network-cidr=10.244.0.0/16
+```
