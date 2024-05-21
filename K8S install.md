@@ -1,5 +1,5 @@
 # 安裝K8S
-<body><p align="right">by Andy Hsu</p></body>
+<body><p align="right">== by Andy Hsu ==</p></body>
 
 ### 1.修改root密碼 / 關閉防火牆 / 開啟root SSH
 ```
