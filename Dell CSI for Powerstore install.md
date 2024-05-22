@@ -86,6 +86,7 @@ Press 'y' to continue or any other key to exit: y
 ```
 
 ### 9.驗證Pod數量及是否皆於"Running"狀態
+> READY 6/6：代表該Pod內有6個Container，6個皆於可用狀態。
 ```
 root@k8s1:~/csi-powerstore/dell-csi-helm-installer# kubectl get pod -n ps
 NAME                                     READY   STATUS    RESTARTS        AGE
