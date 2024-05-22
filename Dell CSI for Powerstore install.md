@@ -68,5 +68,29 @@ vi values.yaml
 ```
 ./csi-install.sh --namespace ps --values ./values.yaml
 ```
-> 所有密碼都略過，直到出現下列訊息後按"y"
+> 所有密碼都略過，直到出現下列訊息後按"y"<p></P>
 > Press 'y' to continue or any other key to exit:
+
+### 9.檢查安裝是否正確完成
+```
+Press 'y' to continue or any other key to exit: y
+|
+|- Installing Driver                                                Success
+  |
+  |--> Waiting for Deployment powerstore-controller to be ready     Success
+  |
+  |--> Waiting for DaemonSet powerstore-node to be ready            Success
+------------------------------------------------------
+> Operation complete
+------------------------------------------------------
+```
+
+### 9.驗證Pod數量及是否皆於"Running"狀態
+```
+root@k8s1:~/csi-powerstore/dell-csi-helm-installer# kubectl get pod -n ps
+NAME                                     READY   STATUS    RESTARTS        AGE
+powerstore-controller-54cd5fccc4-2zm94   6/6     Running   1 (3m51s ago)   4m50s
+powerstore-controller-54cd5fccc4-bx9hd   6/6     Running   1 (3m48s ago)   4m50s
+powerstore-node-52wv4                    2/2     Running   0               4m50s
+powerstore-node-5mk6v                    2/2     Running   0               4m50s
+```
