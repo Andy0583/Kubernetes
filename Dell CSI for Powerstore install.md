@@ -21,11 +21,11 @@ git clone https://github.com/kubernetes-csi/external-snapshotter/
 cd ~/external-snapshotter
 kubectl kustomize client/config/crd | kubectl create -f -
 kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -
-kubectl create namespace ps
 ```
 
 ### 4.安裝CSI
 ```
+kubectl create namespace ps
 cd ~/csi-powerstore/dell-csi-helm-installer/
 openssl s_client -showcerts -connect 172.22.33.20:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
 kubectl create secret generic powerstore-certs-0 -n ps --from-file=cert-0=ca_cert_0.pem
