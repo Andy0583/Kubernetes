@@ -108,4 +108,15 @@ kubeadm join 172.22.46.241:6443 --token 0bxz18.pl91tl6wuovyi04i \
 > 加入Master產出的Join資訊
 
 ### 8.於Master檢查Node資訊，確認安裝成功
-![](https://github.com/Andy0583/Dell-CSI-for-Powerstore/blob/main/image/002.png?raw=true)
+```
+root@k8s1:~# kubectl cluster-info
+Kubernetes control plane is running at https://172.22.46.241:6443
+CoreDNS is running at https://172.22.46.241:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+
+root@k8s1:~# kubectl get node
+NAME            STATUS   ROLES           AGE     VERSION
+k8s1.andy.com   Ready    control-plane   14m     v1.27.10
+k8s2.andy.com   Ready    <none>          3m16s   v1.27.10
+k8s3.andy.com   Ready    <none>          3m13s   v1.27.10
+```
