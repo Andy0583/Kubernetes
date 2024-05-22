@@ -12,7 +12,6 @@ apt install nfs-common -y
 ### 2.下載PowerStore CSI及CSI Snapshot
 ```
 git clone https://github.com/dell/csi-powerstore.git
-git clone https://github.com/dell/helm-charts.git
 git clone https://github.com/kubernetes-csi/external-snapshotter/
 ```
 
@@ -27,6 +26,7 @@ kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl
 ```
 kubectl create namespace ps
 cd ~/csi-powerstore/dell-csi-helm-installer/
+git clone https://github.com/dell/helm-charts.git
 openssl s_client -showcerts -connect 172.22.33.20:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca_cert_0.pem
 kubectl create secret generic powerstore-certs-0 -n ps --from-file=cert-0=ca_cert_0.pem
 ```
@@ -50,7 +50,7 @@ vim secret.yaml
 kubectl create secret generic powerstore-config -n ps --from-file=config=secret.yaml
 ```
 
-### 6.下載svalues.yaml
+### 6.下載values.yaml
 ```
 wget -O my-powerstore-settings.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.10.0/charts/csi-powerstore/values.yaml
 mv my-powerstore-settings.yaml values.yaml
@@ -68,3 +68,5 @@ vi values.yaml
 ```
 ./csi-install.sh --namespace ps --values ./values.yaml
 ```
+> 所有密碼都略過，直到出現下列訊息後按"y"
+> Press 'y' to continue or any other key to exit:
