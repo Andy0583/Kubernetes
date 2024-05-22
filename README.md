@@ -1,4 +1,10 @@
 # K8S交流平台
-提供一個K8S技術交流平台，歡迎有興趣或熱愛此技術人士，一同討論/交流/指導，此平台未來將不定期進行更新。
+![](https://kubernetes.io/images/community/kubernetes-community-final-02.jpg)
 
+### I have not failed. I’ve just found 10,000 ways that won’t work.
+### 我沒有失敗，只不過是發現了一萬種不可行的方式。
+
+<br>
+<br>
+Andy Hsu<br>
 Line ID：andy0583
