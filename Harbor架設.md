@@ -1,5 +1,6 @@
 # Harbor架設
-### 1.修改root密碼 / 關閉防火牆 / 開啟root SSH
+### 1.前置作業
+* root密碼修改 / 啟用
 ```
 sudo passwd root
 sudo ufw disable
@@ -12,12 +13,12 @@ sudo vi /etc/ssh/sshd_config
 sudo systemctl restart ssh
 ```
 
-### 2.更新Ubuntu
+* 更新Ubuntu
 ```
 apt update -y && apt upgrade -y
 ```
 
-### 3.佈署Harbor
+### 2.佈署Harbor
 ```
 curl -fsSL https://get.docker.com | sh
 systemctl start docker && systemctl enable docker
@@ -36,17 +37,18 @@ openssl req -sha512 -new -subj "/C=CN/ST=TP/L=TP/O=SmartX/OU=Lab/CN=harbor.andy.
 vi v3.ext
 ```
 > ```
-authorityKeyIdentifier=keyid,issuer
-basicConstraints=CA:FALSE
-keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
-extendedKeyUsage = serverAuth
-subjectAltName = @alt_names
-
-[alt_names]
-DNS.1=harbor.andy.com
-DNS.2=andy.com
-DNS.3=harbor
+> authorityKeyIdentifier=keyid,issuer
+> basicConstraints=CA:FALSE
+> keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+> extendedKeyUsage = serverAuth
+> subjectAltName = @alt_names
+> 
+> [alt_names]
+> DNS.1=harbor.andy.com
+> DNS.2=andy.com
+> DNS.3=harbor
 > ```
+
 ```
 openssl x509 -req -sha512 -days 3650 -extfile v3.ext -CA ca.crt -CAkey ca.key -CAcreateserial -in harbor.andy.com.csr -out harbor.andy.com.crt
 
@@ -58,14 +60,14 @@ cp harbor.yml.tmpl harbor.yml
 vi harbor.yml
 ```
 > ```
-hostname: harbor.andy.com
-http:
-  port: 80
-https:
-  port: 443
-  certificate: /usr/local/src/harbor/certs/harbor.andy.com.cert
-  private_key: /usr/local/src/harbor/certs/harbor.andy.com.key
-harbor_admin_password: XXXXXXXXXXX
+> hostname: harbor.andy.com
+> http:
+>   port: 9001
+> https:
+>   port: 443
+>   certificate: /usr/local/src/harbor/certs/harbor.andy.com.cert
+>   private_key: /usr/local/src/harbor/certs/harbor.andy.com.key
+> harbor_admin_password: XXXXXXXXXXX
 > ```
 ```
 ./install.sh
@@ -73,16 +75,7 @@ harbor_admin_password: XXXXXXXXXXX
 ```
 vi /etc/docker/daemon.json
 ```
-> ```
-hostname: harbor.andy.com
-http:
-  port: 80
-https:
-  port: 443
-  certificate: /usr/local/src/harbor/certs/harbor.andy.com.cert
-  private_key: /usr/local/src/harbor/certs/harbor.andy.com.key
-harbor_admin_password: XXXXXXXXXXX
-> ```
+
 
 
 
