@@ -129,3 +129,6 @@ unity-controller-778d97dffc-bx9hd   5/5     Running   0          89s
 unity-node-52wv4                    2/2     Running   0          89s
 unity-node-5mk6v                    2/2     Running   0          89s
 ```
+* 查看Storage Hosts是否出現二台Worker
+  
+![](https://github.com/Andy0583/Dell-CSI-for-Powerstore/blob/main/image/010.png?raw=true)
