@@ -77,18 +77,16 @@ wget -O values.yaml https://raw.githubusercontent.com/dell/helm-charts/main/char
 
 ### 8.修改values.yaml
 * 若CSI版本不同，需修改 version
-* 若NFS於不同網段，需修改 externalAccess
 
 ```
 vi values.yaml
 ```
-
 ```
 version: "v2.11.0"
-externalAccess: "192.168.131.0/24"
-
 ```
+* 若為需掛載不同網段，需由Storage進行設定
 
+![](https://github.com/Andy0583/Dell-CSI-for-Powerstore/blob/main/image/011.png?raw=true)
 
 ### 8.安裝CSI
 * 所有密碼都略過，直到出現下列訊息後按"y"
