@@ -124,7 +124,7 @@ spec:
 
 * 依據yaml定義內容建立Pod
 ```
-root@k8s1:~# kubectl create -f pvc.yaml
+root@k8s1:~# kubectl create -f pod.yaml
 ```
 
 
