@@ -1,4 +1,4 @@
-# Powerstore CSI 安裝程序
+# Dell PST CSI Installation
 ### 1.安裝所需Tool
 ```
 apt-get update
