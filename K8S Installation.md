@@ -1,5 +1,5 @@
 # K8S安裝程序
-### 1.前置作業
+### 1.前置作業（Master/Woerker）
 * root密碼修改 / 啟用
 ```
 sudo ufw disable
@@ -18,7 +18,7 @@ sudo systemctl restart ssh
 apt update -y && apt upgrade -y
 ```
 
-### 2.修改Hostname及Hosts 
+### 2.修改Hostname及Hosts（Master/Woerker）
 * 依據環境不同修改Host Name及”hosts”
 
 ```
@@ -31,14 +31,14 @@ EOF
 ```
 
 
-### 3.關閉Swap
+### 3.關閉Swap（Master/Woerker）
 ```
 swapoff -a
 sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 ```
 
 
-### 4.安裝K8S
+### 4.安裝K8S（Master/Woerker）
 ```
 cat <<EOF | tee /etc/modules-load.d/k8s.conf
 overlay
