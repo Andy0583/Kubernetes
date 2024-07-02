@@ -64,7 +64,7 @@ wget -O values.yaml https://github.com/dell/helm-charts/raw/csi-powerstore-2.10.
 vi values.yaml
 ```
 >```
-> externalAccess: "192.168.131.0/24"
+> externalAccess: 192.168.131.0/24
 >```
 
 
