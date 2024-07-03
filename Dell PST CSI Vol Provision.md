@@ -132,13 +132,13 @@ root@k8s1:~# kubectl create -f pod.yaml
 ```
 root@k8s1:~# kubectl get pod -n andy
 NAME       READY   STATUS    RESTARTS   AGE
-podtest    1/1     Running   0          20s
+podt       1/1     Running   0          20s
 ```
 
 
 * 檢查Pod是否正確掛載PowerStore NFS
 ```
-root@k8s1:~# kubectl exec -ti podtest -n andy -- /bin/sh
+root@k8s1:~# kubectl exec -ti pod -n andy -- /bin/sh
 
 # ls
 andy  boot  docker-entrypoint.d   etc   lib    media  opt   root  sbin  sys  usr
