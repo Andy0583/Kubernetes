@@ -106,7 +106,7 @@ root@k8s1:~# vi pod.yaml
 kind: Pod
 apiVersion: v1
 metadata:
-  name: pod
+  name: pod_ginnet
   namespace: andy
 spec:
   volumes:
@@ -131,14 +131,14 @@ root@k8s1:~# kubectl create -f pod.yaml
 * 查看Pod是否建立成功
 ```
 root@k8s1:~# kubectl get pod -n andy
-NAME       READY   STATUS    RESTARTS   AGE
-podt       1/1     Running   0          20s
+NAME             READY   STATUS    RESTARTS   AGE
+pod_ginnet       1/1     Running   0          20s
 ```
 
 
 * 檢查Pod是否正確掛載PowerStore NFS
 ```
-root@k8s1:~# kubectl exec -ti pod -n andy -- /bin/sh
+root@k8s1:~# kubectl exec -ti pod_ginnet -n andy -- /bin/sh
 
 # ls
 andy  boot  docker-entrypoint.d   etc   lib    media  opt   root  sbin  sys  usr
