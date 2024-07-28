@@ -31,7 +31,7 @@ EOF
 ```
 
 
-### 3.關閉Swap（Master/Woerker）
+### 3.永久關閉Swap（Master/Woerker）
 ```
 swapoff -a
 sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
@@ -70,14 +70,18 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null  
 apt-get update
+```
 
+* 安裝Containerd.io 容器化運行平台。
+```
 apt-get install containerd.io  
 containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
 sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
 systemctl restart containerd
 systemctl enable containerd
 ```
-* 請依據所需K8S版本號碼輸入，並進行安裝。
+
+* 請依據所需K8S版本號碼輸入，並進行安裝kubelet、kubeadm、kubectl。
 ```
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.27/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
@@ -91,7 +95,7 @@ modprobe br_netfilter
 
 
 ### 5.K8S初始化（Master）
-* control-plane-endpoint請輸入Master IP，pod-network-cidr維持預設，為Pod內部使用IP。
+* control-plane-endpoint請輸入Master IP，pod-network-cidr維持預設，為Pod內部使用IP(最多可使用65,536個)。
 ```
 kubeadm init --control-plane-endpoint="172.22.46.241" --pod-network-cidr=10.244.0.0/16
 ```
@@ -126,14 +130,17 @@ kubeadm join 172.22.46.241:6443 --token 0bxz18.pl91tl6wuovyi04i \
 ### 7.確認安裝成功（Master）
 *  於Master檢查Node資訊，確認安裝成功
 ```
-root@k8s1:~# kubectl cluster-info
-Kubernetes control plane is running at https://172.22.46.241:6443
-CoreDNS is running at https://172.22.46.241:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
-
 root@k8s1:~# kubectl get node
 NAME            STATUS   ROLES           AGE     VERSION
 k8s1.andy.com   Ready    control-plane   14m     v1.27.10
 k8s2.andy.com   Ready    <none>          3m16s   v1.27.10
 k8s3.andy.com   Ready    <none>          3m13s   v1.27.10
 ```
+
+### 8.測試K8S是否可用（Master）
+```
+kubectl create deployment nginx --image=nginx
+kubectl expose deployment nginx --port=80 --type=NodePort
+kubectl get pod.svc
+```
+查看Web http://nodeIP:Port
