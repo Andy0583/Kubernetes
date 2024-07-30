@@ -150,5 +150,13 @@ NAME    TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 nginx   NodePort   10.99.22.145   <none>        80:32400/TCP   2m11s
 ```
 *  開啟瀏覽器輸入 "K8S IP : Port"，若成功會顯示如下圖
-  
 ![](https://github.com/Andy0583/Kubernetes/blob/main/image/013.png?raw=true)
+
+*  刪除測試資料
+```
+root@k8s1:~# kubectl delete svc nginx
+service "nginx" deleted
+
+root@k8s1:~# kubectl delete deploy nginx
+deployment.apps "nginx" deleted
+```
