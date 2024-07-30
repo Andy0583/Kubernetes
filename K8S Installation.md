@@ -139,8 +139,15 @@ k8s3.andy.com   Ready    <none>          3m13s   v1.27.10
 
 ### 8.測試K8S是否可用（Master）
 ```
-kubectl create deployment nginx --image=nginx
-kubectl expose deployment nginx --port=80 --type=NodePort
-kubectl get pod.svc
+root@k8s1:~# kubectl create deployment nginx --image=nginx
+deployment.apps/nginx created
+
+root@k8s1:~# kubectl expose deployment nginx --port=80 --type=NodePort
+service/nginx exposed
+
+root@k8s1:~# kubectl get svc nginx
+NAME    TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+nginx   NodePort   10.99.22.145   <none>        80:32400/TCP   2m11s
 ```
-查看Web http://nodeIP:Port
+*  查看Web http://nodeIP:Port，若成功會顯示如下圖
+![](https://github.com/Andy0583/Dell-CSI-for-Powerstore/blob/main/image/002.png?raw=true)
