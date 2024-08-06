@@ -83,11 +83,11 @@ systemctl enable containerd
 
 * 請依據所需K8S版本號碼輸入，並進行安裝kubelet、kubeadm、kubectl。
 ```
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.27/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.27/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 apt-get update
 apt-cache madison kubelet
-apt install -y kubelet=1.27.10-1.1 kubeadm=1.27.10-1.1  kubectl=1.27.10-1.1
+apt install -y kubelet kubeadm  kubectl
 apt-mark hold kubelet kubeadm kubectl
 
 modprobe br_netfilter
