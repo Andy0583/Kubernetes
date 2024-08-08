@@ -45,4 +45,35 @@ NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AG
 kubernetes         ClusterIP   10.96.0.1       <none>        443/TCP          47h
 nodeport-service   NodePort    10.104.215.55   <none>        8080:30008/TCP   22s
 ```
-* 開啟瀏覽器輸入任一Node IP及Port，即可連入Pod內App。
+* 在外部開啟瀏覽器輸入任一Node IP：30008，即可連入Pod內App。
+
+### Service-ClusterIP
+```
+root@k8s1:~# vi sv2
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: clusterip-service
+spec:
+  type: ClusterIP
+  ports:
+    - targetPort: 80
+      port: 80
+  selector: 
+    app: andy
+
+root@k8s1:~# kubectl apply -f sv2
+service/nodeport-service created
+
+root@k8s1:~# kubectl get service
+NAME                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+clusterip-service   ClusterIP   10.98.120.204   <none>        80/TCP    7m28s
+kubernetes          ClusterIP   10.96.0.1       <none>        443/TCP   2d
+
+root@k8s1:~# telnet 10.98.120.204 80
+Trying 10.98.120.204...
+Connected to 10.98.120.204.
+Escape character is '^]'.
+
+```
