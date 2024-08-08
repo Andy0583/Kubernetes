@@ -1,5 +1,5 @@
 # K8S教育訓練
-### Server
+### Service
 ```
 root@k8s1:~# vi pod
 ```
